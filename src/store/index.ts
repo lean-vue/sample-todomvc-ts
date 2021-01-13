@@ -9,6 +9,7 @@ export default new Vuex.Store<State>({
     todos: [],
   },
   getters: {
+    todos: (state) => state.todos,
     hasTodos: (state) => state.todos.length > 0,
   },
   mutations: {
