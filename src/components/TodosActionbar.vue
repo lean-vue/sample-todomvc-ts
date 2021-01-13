@@ -1,6 +1,5 @@
 <template>
-  <!-- This footer should be hidden by default and shown when there are todos -->
-  <footer class="footer">
+  <footer v-show="hasTodos" class="footer">
     <!-- This should be `0 items left` by default -->
     <span class="todo-count"><strong>0</strong> item left</span>
     <!-- Remove this if you don't implement routing -->
@@ -23,5 +22,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
-export default Vue.extend({});
+export default Vue.extend({
+  computed: {
+    hasTodos(): boolean { return this.$store.state.todos.length > 0; },
+  },
+});
 </script>
