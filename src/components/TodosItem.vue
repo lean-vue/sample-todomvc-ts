@@ -1,14 +1,17 @@
 <template>
-  <!-- List items should get the class `editing` when editing
-             and `completed` when marked as completed -->
-  <li :class="{ completed: todo.completed }">
+  <li :class="{ completed: todo.completed, editing: editMode }">
     <div class="view">
       <input class="toggle" type="checkbox"
         :checked="todo.completed" @change="toggleTodo(todo.id)" />
-      <label>{{ todo.title }}</label>
+      <label @dblclick="beginEdit">{{ todo.title }}</label>
       <button class="destroy" @click="deleteTodo(todo.id)"></button>
     </div>
-    <input class="edit" value="Create a TodoMVC template" />
+    <input class="edit" value="Create a TodoMVC template"
+      v-model="editTitle"
+      @keyup.enter="commitEdit"
+      @blur="commitEdit"
+      @keyup.esc="cancelEdit"
+    />
   </li>
 </template>
 
@@ -23,8 +26,32 @@ export default Vue.extend({
   props: {
     todo: Object as PropType<Todo>,
   },
+  data() {
+    return {
+      editMode: false,
+      editTitle: '',
+    };
+  },
   methods: {
-    ...mapActions(['toggleTodo', 'deleteTodo']),
+    ...mapActions(['toggleTodo', 'updateTodoTitle', 'deleteTodo']),
+    beginEdit() {
+      this.editMode = true;
+      this.editTitle = this.todo.title;
+    },
+    cancelEdit() {
+      this.editMode = false;
+    },
+    commitEdit() {
+      if (this.editMode) {
+        const title = this.editTitle.trim();
+        if (title) {
+          this.updateTodoTitle({ id: this.todo.id, title });
+        } else {
+          this.deleteTodo(this.todo.id);
+        }
+        this.editMode = false;
+      }
+    },
   },
 });
 </script>
