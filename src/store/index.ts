@@ -15,6 +15,7 @@ export default new Vuex.Store<State>({
     activeCount: (state) => state.todos.reduce((count, t) => (t.completed ? count : count + 1), 0),
     hasTodos: (state) => state.todos.length > 0,
     hasCompletedTodos: (state) => state.todos.findIndex((t) => t.completed) !== -1,
+    allCompleted: (state) => state.todos.findIndex((t) => !t.completed) === -1,
   },
   mutations: {
     initialize: (state, todos: Todo[]) => {
@@ -57,6 +58,14 @@ export default new Vuex.Store<State>({
         state.todos.filter((t) => t.completed).map((t) => backend.deleteTodo(t.id)),
       );
       deletedIds.forEach((id) => commit('deleteTodo', id));
+    },
+    async syncAllCompletedStates({ commit, state, getters }) {
+      const currentState = getters.allCompleted;
+      const changedTodos = await Promise.all(
+        state.todos.filter((t) => t.completed === currentState)
+          .map((t) => backend.updateTodo(t.id, { completed: !currentState })),
+      );
+      changedTodos.forEach((t) => commit('updateTodo', t));
     },
   },
   modules: {
