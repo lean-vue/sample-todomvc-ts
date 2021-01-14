@@ -2,7 +2,7 @@
   <footer v-show="hasTodos" class="footer">
     <!-- This should be `0 items left` by default -->
     <span class="todo-count"><strong>{{ activeCount }}</strong>
-      {{ activeCount === 1 ? 'item' : 'items' }} left
+      {{ 'item' | pluralize(activeCount) }} left
     </span>
     <!-- Remove this if you don't implement routing -->
     <ul class="filters">
@@ -32,6 +32,11 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions(['deleteCompletedTodos']),
+  },
+  filters: {
+    pluralize(word: string, count: number): string {
+      return count === 1 ? word : `${word}s`;
+    },
   },
 });
 </script>
