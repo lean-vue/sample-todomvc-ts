@@ -12,7 +12,9 @@ export default new Vuex.Store<State>({
   },
   getters: {
     todos: (state) => state.todos,
+    activeCount: (state) => state.todos.reduce((count, t) => (t.completed ? count : count + 1), 0),
     hasTodos: (state) => state.todos.length > 0,
+    hasCompletedTodos: (state) => state.todos.findIndex((t) => t.completed) !== -1,
   },
   mutations: {
     initialize: (state, todos: Todo[]) => {
