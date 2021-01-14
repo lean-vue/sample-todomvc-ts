@@ -21,6 +21,9 @@ export default new Vuex.Store<State>({
     createTodo: (state, todo: Todo) => {
       state.todos.push(todo);
     },
+    updateTodo: (state, todo: Todo) => {
+      state.todos = state.todos.map((t) => (t.id === todo.id ? todo : t));
+    },
   },
   actions: {
     async initialize({ commit }) {
@@ -30,6 +33,11 @@ export default new Vuex.Store<State>({
     async createTodo({ commit }, title: string) {
       const todo = await backend.createTodo(title);
       commit('createTodo', todo);
+    },
+    async toggleTodo({ commit, state }, id: number) {
+      let todo = state.todos.find((t) => t.id === id);
+      todo = await backend.updateTodo(id, { completed: !todo?.completed });
+      commit('updateTodo', todo);
     },
   },
   modules: {
