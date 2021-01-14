@@ -6,7 +6,7 @@
       <input class="toggle" type="checkbox"
         :checked="todo.completed" @change="toggleTodo(todo.id)" />
       <label>{{ todo.title }}</label>
-      <button class="destroy"></button>
+      <button class="destroy" @click="deleteTodo(todo.id)"></button>
     </div>
     <input class="edit" value="Create a TodoMVC template" />
   </li>
@@ -24,7 +24,7 @@ export default Vue.extend({
     todo: Object as PropType<Todo>,
   },
   methods: {
-    ...mapActions(['toggleTodo']),
+    ...mapActions(['toggleTodo', 'deleteTodo']),
   },
 });
 </script>

@@ -24,6 +24,9 @@ export default new Vuex.Store<State>({
     updateTodo: (state, todo: Todo) => {
       state.todos = state.todos.map((t) => (t.id === todo.id ? todo : t));
     },
+    deleteTodo: (state, id: number) => {
+      state.todos = state.todos.filter((t) => t.id !== id);
+    },
   },
   actions: {
     async initialize({ commit }) {
@@ -38,6 +41,10 @@ export default new Vuex.Store<State>({
       let todo = state.todos.find((t) => t.id === id);
       todo = await backend.updateTodo(id, { completed: !todo?.completed });
       commit('updateTodo', todo);
+    },
+    async deleteTodo({ commit }, id: number) {
+      await backend.deleteTodo(id);
+      commit('deleteTodo', id);
     },
   },
   modules: {
