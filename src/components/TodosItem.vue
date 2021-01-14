@@ -6,7 +6,7 @@
       <label @dblclick="beginEdit">{{ todo.title }}</label>
       <button class="destroy" @click="deleteTodo(todo.id)"></button>
     </div>
-    <input class="edit" value="Create a TodoMVC template"
+    <input ref="editFld" class="edit" value="Create a TodoMVC template"
       v-model="editTitle"
       @keyup.enter="commitEdit"
       @blur="commitEdit"
@@ -37,6 +37,9 @@ export default Vue.extend({
     beginEdit() {
       this.editMode = true;
       this.editTitle = this.todo.title;
+      this.$nextTick(() => {
+        (this.$refs.editFld as HTMLInputElement).focus();
+      });
     },
     cancelEdit() {
       this.editMode = false;
