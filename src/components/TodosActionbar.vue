@@ -1,7 +1,9 @@
 <template>
   <footer v-show="hasTodos" class="footer">
     <!-- This should be `0 items left` by default -->
-    <span class="todo-count"><strong>{{ activeCount }}</strong> item left</span>
+    <span class="todo-count"><strong>{{ activeCount }}</strong>
+      {{ activeCount === 1 ? 'item' : 'items' }} left
+    </span>
     <!-- Remove this if you don't implement routing -->
     <ul class="filters">
       <li>
