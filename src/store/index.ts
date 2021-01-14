@@ -52,6 +52,12 @@ export default new Vuex.Store<State>({
       await backend.deleteTodo(id);
       commit('deleteTodo', id);
     },
+    async deleteCompletedTodos({ commit, state }) {
+      const deletedIds = await Promise.all(
+        state.todos.filter((t) => t.completed).map((t) => backend.deleteTodo(t.id)),
+      );
+      deletedIds.forEach((id) => commit('deleteTodo', id));
+    },
   },
   modules: {
   },

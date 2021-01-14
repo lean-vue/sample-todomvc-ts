@@ -14,17 +14,22 @@
         <a href="#/completed">Completed</a>
       </li>
     </ul>
-    <button v-if="hasCompletedTodos" class="clear-completed">Clear completed</button>
+    <button v-if="hasCompletedTodos" @click="deleteCompletedTodos" class="clear-completed">
+      Clear completed
+    </button>
   </footer>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default Vue.extend({
   computed: {
     ...mapGetters(['activeCount', 'hasTodos', 'hasCompletedTodos']),
+  },
+  methods: {
+    ...mapActions(['deleteCompletedTodos']),
   },
 });
 </script>
