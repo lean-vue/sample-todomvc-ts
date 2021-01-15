@@ -8,9 +8,10 @@ import store from './store';
 import 'todomvc-app-css/index.css';
 
 // Import global directives
-// import './directives/FocusOn';
+import focusOn from './directives/focus-on';
 
 createApp(App)
+  .directive('focus-on', focusOn)
   .use(router)
   .use(store)
   .mount('#app');
