@@ -9,11 +9,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import TodosList from './TodosList.vue';
 
-export default Vue.extend({
+export default {
   components: { TodosList },
   computed: {
     ...mapGetters(['hasTodos', 'allCompleted']),
@@ -21,5 +20,5 @@ export default Vue.extend({
   methods: {
     ...mapActions(['syncAllCompletedStates']),
   },
-});
+};
 </script>
