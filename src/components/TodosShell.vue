@@ -10,20 +10,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { mapActions, mapMutations } from 'vuex';
 import TodosActionbar from './TodosActionbar.vue';
 import TodosInput from './TodosInput.vue';
 import TodosMain from './TodosMain.vue';
 
-export default Vue.extend({
+export default defineComponent({
   components: { TodosMain, TodosInput, TodosActionbar },
   methods: {
     ...mapActions(['createTodo']),
+    ...mapActions({
+      initializeStore: 'initialize',
+    }),
     ...mapMutations(['setVisibility']),
   },
   mounted() {
-    this.$store.dispatch('initialize');
+    this.initializeStore();
     const visibility = this.$route.params.visibility || 'all';
     this.setVisibility(visibility);
   },
