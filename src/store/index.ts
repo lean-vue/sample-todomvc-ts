@@ -52,7 +52,7 @@ export default new Vuex.Store<State>({
       todo = await backend.updateTodo(id, { completed: !todo?.completed });
       commit('updateTodo', todo);
     },
-    async updateTodoTitle({ commit }, payload: {id: number, title: string}) {
+    async updateTodoTitle({ commit }, payload: {id: number; title: string}) {
       const todo = await backend.updateTodo(payload.id, { title: payload.title });
       commit('updateTodo', todo);
     },
