@@ -1,19 +1,13 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 
-import store from './store';
-import router from './router';
+// import store from './store';
+// import router from './router';
 
 // Import app styles
 import 'todomvc-app-css/index.css';
 
 // Import global directives
-import './directives/FocusOn';
+// import './directives/FocusOn';
 
-Vue.config.productionTip = false;
-
-new Vue({
-  store,
-  router,
-  render(h) { return h(App); },
-}).$mount('#app');
+createApp(App).mount('#app');

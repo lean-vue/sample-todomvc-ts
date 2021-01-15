@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view />
+    <!-- <router-view /> -->
     <footer class="info">
       <p>Double-click to edit a todo</p>
       <!-- Remove the below line ↓ -->
@@ -13,9 +13,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
+export default {
   name: 'App',
-});
+};
 </script>
