@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
-// import store from './store';
-// import router from './router';
+import router from './router';
+import store from './store';
 
 // Import app styles
 import 'todomvc-app-css/index.css';
@@ -10,4 +10,7 @@ import 'todomvc-app-css/index.css';
 // Import global directives
 // import './directives/FocusOn';
 
-createApp(App).mount('#app');
+createApp(App)
+  .use(router)
+  .use(store)
+  .mount('#app');

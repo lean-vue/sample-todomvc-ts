@@ -1,12 +1,9 @@
+import { createStore } from 'vuex';
 import { Todo } from '@/models/todo';
-import Vue from 'vue';
-import Vuex from 'vuex';
 import backend from '@/api/local-backend';
 import { State } from './state';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store<State>({
+export default createStore<State>({
   state: {
     todos: [],
     visibility: 'all',
@@ -52,7 +49,7 @@ export default new Vuex.Store<State>({
       todo = await backend.updateTodo(id, { completed: !todo?.completed });
       commit('updateTodo', todo);
     },
-    async updateTodoTitle({ commit }, payload: {id: number, title: string}) {
+    async updateTodoTitle({ commit }, payload: {id: number; title: string}) {
       const todo = await backend.updateTodo(payload.id, { title: payload.title });
       commit('updateTodo', todo);
     },

@@ -1,17 +1,14 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
-
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import TodosShell from '@/components/TodosShell.vue';
 
-Vue.use(VueRouter);
-
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/:visibility?', component: TodosShell,
   },
 ];
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes,
 });
 
