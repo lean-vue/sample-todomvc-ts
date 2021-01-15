@@ -5,14 +5,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { mapGetters } from 'vuex';
 import TodosItem from './TodosItem.vue';
 
-export default Vue.extend({
+export default {
   components: { TodosItem },
   computed: {
     ...mapGetters(['todos']),
   },
-});
+};
 </script>
