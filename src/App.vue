@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <router-view /> -->
+    <router-view />
     <footer class="info">
       <p>Double-click to edit a todo</p>
       <p>Created by <a href="https://lean-stack.de">Micha Alt</a></p>
