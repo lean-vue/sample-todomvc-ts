@@ -9,15 +9,22 @@ Vue.use(Vuex);
 export default new Vuex.Store<State>({
   state: {
     todos: [],
+    visibility: 'all',
   },
   getters: {
-    todos: (state) => state.todos,
+    isVisibility: (state) => (visibility: string) => state.visibility === visibility,
+    todos: (state) => state.todos.filter((t) => (state.visibility === 'all' ? true : (
+      (state.visibility === 'completed') === t.completed
+    ))),
     activeCount: (state) => state.todos.reduce((count, t) => (t.completed ? count : count + 1), 0),
     hasTodos: (state) => state.todos.length > 0,
     hasCompletedTodos: (state) => state.todos.findIndex((t) => t.completed) !== -1,
     allCompleted: (state) => state.todos.findIndex((t) => !t.completed) === -1,
   },
   mutations: {
+    setVisibility: (state, visibility) => {
+      state.visibility = visibility;
+    },
     initialize: (state, todos: Todo[]) => {
       state.todos = todos;
     },

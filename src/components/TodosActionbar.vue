@@ -7,13 +7,19 @@
     <!-- Remove this if you don't implement routing -->
     <ul class="filters">
       <li>
-        <a class="selected" href="#/">All</a>
+        <router-link :class="{ selected: isVisibility('all') }" to="/">
+          All
+        </router-link>
       </li>
       <li>
-        <a href="#/active">Active</a>
+        <router-link :class="{ selected: isVisibility('active') }" to="/active">
+          Active
+        </router-link>
       </li>
       <li>
-        <a href="#/completed">Completed</a>
+        <router-link :class="{ selected: isVisibility('completed') }" to="/completed">
+          Completed
+        </router-link>
       </li>
     </ul>
     <button v-if="hasCompletedTodos" @click="deleteCompletedTodos" class="clear-completed">
@@ -28,7 +34,7 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default Vue.extend({
   computed: {
-    ...mapGetters(['activeCount', 'hasTodos', 'hasCompletedTodos']),
+    ...mapGetters(['activeCount', 'hasTodos', 'hasCompletedTodos', 'isVisibility']),
   },
   methods: {
     ...mapActions(['deleteCompletedTodos']),

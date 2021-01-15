@@ -1,6 +1,6 @@
 <template>
   <div>
-    <todos-shell />
+    <router-view />
     <footer class="info">
       <p>Double-click to edit a todo</p>
       <!-- Remove the below line ↓ -->
@@ -14,10 +14,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import TodosShell from './components/TodosShell.vue';
 
 export default Vue.extend({
   name: 'App',
-  components: { TodosShell },
 });
 </script>
