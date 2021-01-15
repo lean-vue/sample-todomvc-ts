@@ -18,14 +18,16 @@
 
 <script lang="ts">
 // See: https://github.com/vuejs/eslint-config-typescript/issues/14
-/* eslint-disable no-unused-vars */
 import { Todo } from '@/models/todo';
-import Vue, { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { mapActions } from 'vuex';
 
-export default Vue.extend({
+export default defineComponent({
   props: {
-    todo: Object as PropType<Todo>,
+    todo: {
+      type: Object as PropType<Todo>,
+      required: true,
+    },
   },
   data() {
     return {
