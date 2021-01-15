@@ -6,7 +6,7 @@
       <label @dblclick="beginEdit">{{ todo.title }}</label>
       <button class="destroy" @click="deleteTodo(todo.id)"></button>
     </div>
-    <input class="edit" value="Create a TodoMVC template"
+    <input class="edit"
       v-focus-on="editMode"
       v-model="editTitle"
       @keyup.enter="commitEdit"
