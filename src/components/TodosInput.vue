@@ -1,6 +1,6 @@
 <template>
-  <input v-model="title" @keyup.enter="createTodo"
-    class="new-todo" placeholder="What needs to be done?" autofocus />
+  <input v-model="title" @keyup.enter="createTodo" v-focus-on="true"
+    class="new-todo" placeholder="What needs to be done?" />
 </template>
 
 <script lang="ts">

@@ -7,6 +7,9 @@ import router from './router';
 // Import app styles
 import 'todomvc-app-css/index.css';
 
+// Import global directives
+import './directives/FocusOn';
+
 Vue.config.productionTip = false;
 
 new Vue({
